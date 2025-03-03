@@ -9,8 +9,9 @@ import java.util.List;
 
 @Service
 public class GameServiceImpl extends AbstractSimpleServiceImpl<Game, GameDAO> implements GameService {
-	public void setGameDAO(final GameDAO gameDao) {
-		super.setDAO(gameDao);
+
+	public GameServiceImpl(final GameDAO gameDAO) {
+		super.setDAO(gameDAO);
 	}
 
 	@Override

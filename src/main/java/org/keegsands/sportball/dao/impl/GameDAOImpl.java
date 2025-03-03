@@ -57,7 +57,7 @@ public class GameDAOImpl extends AbstractSimpleDAOImpl<Game> implements GameDAO 
 			calendar.add(Calendar.DATE, -1);
 		}
 
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final Query query = session.createQuery(TEN_GAMES_SQL);
 		query.setParameter("lastWeekDate", calendar.getTime());
 		query.setMaxResults(12);
@@ -72,7 +72,7 @@ public class GameDAOImpl extends AbstractSimpleDAOImpl<Game> implements GameDAO 
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Game> findByTeamAndSeason(final int teamID, final int seasonID) {
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final Query query = session.createQuery(FIND_BY_TEAM_AND_SEASON_SQL);
 		query.setParameter("seasonID", seasonID);
 		query.setParameter("teamID", teamID);
@@ -89,7 +89,7 @@ public class GameDAOImpl extends AbstractSimpleDAOImpl<Game> implements GameDAO 
 		game.setAwayTeamRuns(awayTeamRuns);
 		game.setComplete(complete);
 		game.setStatus(status);
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = getSession();
 		session.update(game);
 		LOGGER.info("Updating score for game id: " + gameID + " Home team runs = " + homeTeamRuns + " away team runs = " + awayTeamRuns);
 	}
@@ -99,7 +99,7 @@ public class GameDAOImpl extends AbstractSimpleDAOImpl<Game> implements GameDAO 
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Game> findBySeason(final int seasonID) {
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final Query query = session.createQuery(FIND_BY_SEASON_SQL);
 		query.setParameter("seasonID", seasonID);
 		final List<Game> list = query.list();

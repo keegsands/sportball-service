@@ -38,7 +38,7 @@ public class SeasonDAOImpl extends AbstractSimpleDAOImpl<Season> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Season> listStandingSeasons() {
-		final Session session = this.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final List<Season> list = session.createQuery("from Season WHERE standingsSupport = true ORDER by name DESC").list();
 		for (final Season p : list) {
 			getLogger().info("Team List::" + p);

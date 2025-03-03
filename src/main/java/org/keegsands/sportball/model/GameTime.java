@@ -2,13 +2,13 @@ package org.keegsands.sportball.model;
 
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "tap_softball.game_time")
+@Table(name = "game_time")
 public class GameTime {
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("h:mm a");
 

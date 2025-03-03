@@ -1,9 +1,9 @@
 package org.keegsands.sportball.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="tap_softball.player")
+@Table(name="player")
 public class Player {
 	
 	@Id

@@ -1,5 +1,7 @@
 package org.keegsands.sportball.dao.impl;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.keegsands.sportball.dao.SimpleDAO;
@@ -9,7 +11,8 @@ import java.util.List;
 
 public abstract class AbstractSimpleDAOImpl<G> implements SimpleDAO<G> {
 
-	protected SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	abstract protected Logger getLogger();
 
@@ -17,18 +20,19 @@ public abstract class AbstractSimpleDAOImpl<G> implements SimpleDAO<G> {
 
 	abstract protected Class<G> getType();
 
-	public void setSessionFactory(SessionFactory sf) {
-		this.sessionFactory = sf;
+	protected Session getSession(){
+		return entityManager.unwrap(Session.class);
 	}
 
+
 	public void add(G p) {
-		final Session session = this.sessionFactory.getCurrentSession();
+		final Session session = getSession();
 		session.persist(p);
 		getLogger().info("Entity saved successfully, Entity Details=" + p);
 	}
 
 	public void update(G p) {
-		final Session session = this.sessionFactory.getCurrentSession();
+		final Session session = getSession();
 		session.update(p);
 		getLogger().info("Entity updated successfully, Entity Details=" + p);
 
@@ -36,7 +40,7 @@ public abstract class AbstractSimpleDAOImpl<G> implements SimpleDAO<G> {
 
 	@SuppressWarnings("unchecked")
 	public List<G> list() {
-		final Session session = this.sessionFactory.getCurrentSession();
+		final Session session = getSession();
 		final List<G> list = session.createQuery(getFromClause()).list();
 		for (final G p : list) {
 			getLogger().info("Team List::" + p);
@@ -46,7 +50,7 @@ public abstract class AbstractSimpleDAOImpl<G> implements SimpleDAO<G> {
 
 	@SuppressWarnings("unchecked")
 	public G getById(int id) {
-		final Session session = this.sessionFactory.getCurrentSession();
+		final Session session = getSession();
 		final G p = (G) session.get(getType(), Integer.valueOf(id));
 		getLogger().info("Entity loaded successfully, Entity details=" + p);
 		return p;
@@ -54,7 +58,7 @@ public abstract class AbstractSimpleDAOImpl<G> implements SimpleDAO<G> {
 
 	@SuppressWarnings("unchecked")
 	public void remove(int id) {
-		final Session session = this.sessionFactory.getCurrentSession();
+		final Session session = getSession();
 		final G p = (G) session.load(getType(), Integer.valueOf(id));
 		if (null != p) {
 			session.delete(p);

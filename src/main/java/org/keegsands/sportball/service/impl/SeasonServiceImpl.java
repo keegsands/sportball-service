@@ -1,8 +1,10 @@
 package org.keegsands.sportball.service.impl;
 
+import org.keegsands.sportball.model.Season;
 import org.keegsands.sportball.dao.CampaignDAO;
 import org.keegsands.sportball.dao.GameDAO;
 import org.keegsands.sportball.dao.SeasonDAO;
+import org.keegsands.sportball.repository.SeasonRepository;
 import org.keegsands.sportball.model.*;
 import org.keegsands.sportball.service.SeasonService;
 import org.keegsands.sportball.util.BaseballUtil;
@@ -14,22 +16,16 @@ import java.util.*;
 @Service
 public class SeasonServiceImpl extends AbstractSimpleServiceImpl<Season, SeasonDAO> implements SeasonService {
 	private static final int CURRENT_SEASON = 18;
-
-	
-	public void setSeasonDAO(final SeasonDAO seasonDAO) {
-		super.setDAO(seasonDAO);
-	}
-
 	private GameDAO gameDAO;
-
-	public void setGameDAO(final GameDAO gameDAO) {
-		this.gameDAO = gameDAO;
-	}
-	
 	private CampaignDAO campaignDAO;
-	
-	public void setCampaignDAO(final CampaignDAO campaignDAO){
+
+	private SeasonRepository seasonRepository;
+
+	public SeasonServiceImpl(final SeasonDAO seasonDAO, final GameDAO gameDAO, final CampaignDAO campaignDAO, final SeasonRepository seasonRepository){
+		super.setDAO(seasonDAO);
+		this.gameDAO = gameDAO;
 		this.campaignDAO = campaignDAO;
+		this.seasonRepository = seasonRepository;
 	}
 
 	@Override
@@ -91,6 +87,10 @@ public class SeasonServiceImpl extends AbstractSimpleServiceImpl<Season, SeasonD
 			}
 		}
 		return standings;
+	}
+
+	public List<Season> getSeasons(){
+		return this.seasonRepository.findAll();
 	}
 	
 

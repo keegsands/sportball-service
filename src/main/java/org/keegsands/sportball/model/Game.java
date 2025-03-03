@@ -1,15 +1,14 @@
 package org.keegsands.sportball.model;
 
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "tap_softball.game")
+@Table(name = "game")
 public class Game {
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("M/dd/yyyy");
 	private static final DateFormat FULL_FORMAT = new SimpleDateFormat("EEE, MMM dd, yyyy");

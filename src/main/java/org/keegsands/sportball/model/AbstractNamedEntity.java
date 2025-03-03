@@ -1,6 +1,6 @@
 package org.keegsands.sportball.model;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractNamedEntity {

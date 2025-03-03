@@ -7,7 +7,7 @@ import org.keegsands.sportball.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 public class UserDAOImpl extends AbstractSimpleDAOImpl<User> implements UserDAO {
@@ -37,7 +37,7 @@ public class UserDAOImpl extends AbstractSimpleDAOImpl<User> implements UserDAO 
 	@Override
 	public User findUserByUsername(String username) {
 		LOGGER.info("Looking up user information for: " + username);
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final Query query = session.createQuery("from User WHERE username= :theUserName");
 		query.setParameter("theUserName", username);
 		query.setMaxResults(1);

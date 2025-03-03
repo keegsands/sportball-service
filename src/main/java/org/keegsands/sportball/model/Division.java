@@ -1,9 +1,9 @@
 package org.keegsands.sportball.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tap_softball.division")
+@Table(name = "division")
 public class Division extends AbstractNamedEntity  implements Comparable<Division>{
 	
 	

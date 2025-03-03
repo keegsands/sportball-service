@@ -1,20 +1,20 @@
 package org.keegsands.sportball.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="tap_softball.season")
-public class Season extends AbstractNamedEntity{
+@Table(name="season")
+public class Season extends AbstractNamedEntity {
 	@Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 	
-	public int getId() {
+	public Integer getId() {
         return id;
     }
  
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     

@@ -41,7 +41,7 @@ public class PlayerDAOImpl extends AbstractSimpleDAOImpl<Player> implements Play
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Player> findByTeam(final int teamId) {
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final Query query = session.createQuery(FIND_BY_TEAM_SQL);
 		query.setParameter("teamId", teamId);
 		final List<Player> list = query.list();

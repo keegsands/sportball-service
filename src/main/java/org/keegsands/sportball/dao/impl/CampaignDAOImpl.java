@@ -6,10 +6,12 @@ import org.keegsands.sportball.dao.CampaignDAO;
 import org.keegsands.sportball.model.Campaign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
 public class CampaignDAOImpl extends AbstractSimpleDAOImpl<Campaign> implements CampaignDAO {
 
 	private static final Logger LOGGER = LoggerFactory
@@ -41,7 +43,7 @@ public class CampaignDAOImpl extends AbstractSimpleDAOImpl<Campaign> implements 
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Campaign> findBySeason(final int seasonID) {
-		final Session session = super.sessionFactory.getCurrentSession();
+		final Session session = super.getSession();
 		final Query query = session.createQuery(FIND_BY_SEASON_SQL);
 		query.setParameter("seasonID", seasonID);
 		final List<Campaign> list = query.list();

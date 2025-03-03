@@ -18,4 +18,6 @@ public interface SeasonService extends SimpleService<Season> {
 	List<Season> listStandingSeasons();
 
 	Season getCurrentSeason();
+
+	List<Season> getSeasons();
 }

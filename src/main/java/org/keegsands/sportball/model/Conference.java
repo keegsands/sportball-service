@@ -1,9 +1,9 @@
 package org.keegsands.sportball.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tap_softball.conference")
+@Table(name = "conference")
 public class Conference extends AbstractNamedEntity {
 	@Id
 	@Column(name = "id")
